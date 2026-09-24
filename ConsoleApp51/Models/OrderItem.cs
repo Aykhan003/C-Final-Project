@@ -24,4 +24,24 @@ internal class OrderItem
         price = 0;
         return false;
     }
+    public void ApplyDiscount(ref decimal price,decimal discountPercentage)
+    {
+        decimal discountAmount = price * (discountPercentage / 100);
+        price -= discountAmount;
+    }
+    private List<Product> _products = new List<Product>();
+    public List<Product> SearchProducts (string searchTerm)
+    {
+        List<Product> result = new List<Product>();
+        searchTerm = searchTerm.Trim().ToLower();
+        string[]searchTerms = searchTerm.Split(' ');
+        foreach (var product in _products)
+        {
+            string name = product.Name.Trim().ToLower();
+            string description = product.Description.Trim().ToLower();
+            string brand = (product is ElectronicProduct electronicProduct) ? electronicProduct.Brand.Trim().ToLower() : string.Empty;
+            bool found = false;
+        }
+        return result;
+    }
 }
