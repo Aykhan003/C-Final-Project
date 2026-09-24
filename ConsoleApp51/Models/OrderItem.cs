@@ -32,16 +32,20 @@ internal class OrderItem
     private List<Product> _products = new List<Product>();
     public List<Product> SearchProducts (string searchTerm)
     {
-        List<Product> result = new List<Product>();
-        searchTerm = searchTerm.Trim().ToLower();
-        string[]searchTerms = searchTerm.Split(' ');
-        foreach (var product in _products)
-        {
-            string name = product.Name.Trim().ToLower();
-            string description = product.Description.Trim().ToLower();
-            string brand = (product is ElectronicProduct electronicProduct) ? electronicProduct.Brand.Trim().ToLower() : string.Empty;
-            bool found = false;
-        }
-        return result;
+        searchTerm = searchTerm.Trim().ToLower().Replace("-", " ");
+
+        string[] words = searchTerm.Split(' ');
+
+        return _products.Where(p =>
+            words.Any(word =>
+                p.Name.ToLower().Contains(word) ||
+                p.Description.ToLower().Contains(word) ||
+                p.Name.ToLower().StartsWith(word) ||
+                p.Name.ToLower().EndsWith(word) ||
+                p.Description.ToLower().StartsWith(word) ||
+                p.Description.ToLower().EndsWith(word)
+                
+            )
+        ).ToList();
     }
 }
