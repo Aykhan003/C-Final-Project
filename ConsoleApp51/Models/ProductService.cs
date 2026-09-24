@@ -5,6 +5,7 @@ namespace ConsoleApp51.Models;
 internal class ProductService : IProductService
 {
     private List<Product> _products = new List<Product>();
+    private List<Order> _orders = new List<Order>();
     public void AddProduct(Product product)
     {
         _products.Add(product);
@@ -47,5 +48,33 @@ internal class ProductService : IProductService
                 p.Description.ToLower().EndsWith(word)
             )
         ).ToList();
+    }
+    public Product GetMostExpensiveProduct()
+    {
+        return _products.Where(p => !p.IsDeleted).OrderByDescending(p => p.Price).FirstOrDefault() ?? throw new Exception("No products available");
+    }
+    public Product GetCheapestProduct()
+    {
+        return _products.Where(p => !p.IsDeleted).OrderBy(p => p.Price).FirstOrDefault() ?? throw new Exception("No products available");
+    }
+    public List<Product> GetAvailableProducts()
+    {
+        return _products.Where(p => !p.IsDeleted && p.Stock > 0).ToList();
+    }
+    public List<Product> GetOutOfStockProducts()
+    {
+        return _products.Where(p => !p.IsDeleted && p.Stock == 0).ToList();
+    }
+    public List<Product> GetProductsByPrice(decimal minPrice, decimal maxPrice)
+    {
+        return _products.Where(p => !p.IsDeleted && p.Price >= minPrice && p.Price <= maxPrice).ToList();
+    }
+    public Product GetBestSellingProduct()
+    {
+        return _orders.SelectMany(o => o.Products).GroupBy(p => p.Id).OrderByDescending(g => g.Count()).Select(g => g.First()).FirstOrDefault() ?? throw new Exception("No products available");
+    }
+    public List<Product> GetCustomerOrders(int customerId)
+    {
+        return _orders.Where(o => o.Customer.Id == customerId).SelectMany(o => o.Products).ToList();
     }
 }
