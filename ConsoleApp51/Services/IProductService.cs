@@ -10,5 +10,5 @@ internal interface IProductService
     public Product GetProduct(int id);
     public List<Product> GetAllProducts();
     public List<Product> SearchProducts(string searchTerm);
-
+    List<Product> GetDeletedProducts();
 }
