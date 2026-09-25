@@ -7,17 +7,6 @@ internal class OrderService : IOrderService
     private List<Order> _orders = new List<Order>();
     private List<Customer> _customers = new List<Customer>();
     private List<Product> _products = new List<Product>();
-    private IProductService productService;
-
-    public OrderService(List<Customer> customers, IProductService productService)
-    {
-        _customers = customers;
-        this.productService = productService;
-    }
-
-    public OrderService()
-    {
-    }
 
     public Order CreateOrder(Customer customer)
     {

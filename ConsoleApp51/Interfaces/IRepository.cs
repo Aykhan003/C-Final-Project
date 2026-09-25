@@ -4,8 +4,7 @@ internal interface IRepository<T>
 {
     public void Add(T entity);
     public T GetById(int id);
-    public void GetAll();
-    public List<T> GetAlls();
+    public List<T> GetAll();
     public void Update(T entity);
     public void Delete(T entity);
 

@@ -23,16 +23,23 @@ internal class Repository<T> : IRepository<T>
             return (T)entity;
         }
     }
-    public List<T> GetAlls()
+    public List<T> GetAll()
     {
         return _entities.ToList();
     }
     public void Update(T entity)
     {
-     
+        dynamic? existingEntity = _entities
+                .FirstOrDefault(x =>
+                    ((dynamic)x!).Id == ((dynamic)entity!).Id);
+        if (existingEntity == null)
+            throw new KeyNotFoundException(
+                "Entity tapılmadı.");
+        int index = _entities.IndexOf(existingEntity);
+        _entities[index] = entity;
     }
     public void Delete(T entity)
     {
         _entities.Remove(entity);
-    }
+    } 
 }

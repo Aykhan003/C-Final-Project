@@ -77,4 +77,8 @@ internal class ProductService : IProductService
     {
         return _orders.Where(o => o.Customer.Id == customerId).SelectMany(o => o.Products).ToList();
     }
+    public List<Product> GetDeletedProducts()
+    {
+        return _products.Where(p => p.IsDeleted).ToList();
+    }
 }
