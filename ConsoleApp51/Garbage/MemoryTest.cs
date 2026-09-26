@@ -25,8 +25,11 @@ internal class MemoryTest
                     1,
                     Enum.Category.Electronics);
 
+            decimal unitPrice = product.Price;
+            decimal totalPrice = product.Price * 1;
+
             items.Add(
-                new OrderItem(product, 1));
+                new OrderItem(product, 1, unitPrice, totalPrice));
         }
 
         Console.WriteLine(
