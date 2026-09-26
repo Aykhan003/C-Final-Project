@@ -342,11 +342,11 @@ class Program
 
         if (filtered.Count == 0)
         {
-            Console.WriteLine("\n❌ Filtrlənmiş məhsul yoxdur!");
+            Console.WriteLine("\n❌ Filtrlənmis mehsul yoxdur!");
             return;
         }
 
-        Console.WriteLine($"\n✅ {filtered.Count} məhsul tapıldı:\n");
+        Console.WriteLine($"\n✅ {filtered.Count} mehsul tapıldı:\n");
         foreach (var product in filtered)
         {
             Console.WriteLine($"• {product.Name} ({product.Price:C}) - {product.Category}");
@@ -356,50 +356,50 @@ class Program
     private static void DeleteProduct()
     {
         Console.Clear();
-        Console.WriteLine("🗑️ MƏHSUL SİL (Soft Delete)");
+        Console.WriteLine("🗑️ MEHSUL SIL (Soft Delete)");
         Console.WriteLine("════════════════════════════════════════");
 
-        Console.Write("\nMəhsul ID-ni daxil edin: ");
+        Console.Write("\nMehsul ID-ni daxil edin: ");
         if (!int.TryParse(Console.ReadLine(), out int productId))
-            throw new ArgumentException("Yanlış ID!");
+            throw new ArgumentException("Yanlıs ID!");
 
         var product = _products.FirstOrDefault(p => p.Id == productId);
         if (product == null)
-            throw new ProductNotFoundException($"ID {productId} olan məhsul tapılmadı!");
+            throw new ProductNotFoundException($"ID {productId} olan mehsul tapılmadı!");
 
         _productService.RemoveProduct(productId);
-        Console.WriteLine($"\n✅ Məhsul '{product.Name}' soft delete ilə silindi!");
+        Console.WriteLine($"\n✅ Mehsul '{product.Name}' soft delete ile silindi!");
     }
 
     private static void RestoreProduct()
     {
         Console.Clear();
-        Console.WriteLine("♻️ MƏHSUL BƏRPA ET");
+        Console.WriteLine("♻️ MEHSUL BƏRPA ET");
         Console.WriteLine("════════════════════════════════════════");
 
-        Console.Write("\nMəhsul ID-ni daxil edin: ");
+        Console.Write("\nMehsul ID-ni daxil edin: ");
         if (!int.TryParse(Console.ReadLine(), out int productId))
-            throw new ArgumentException("Yanlış ID!");
+            throw new ArgumentException("Yanlıs ID!");
 
         var product = _products.FirstOrDefault(p => p.Id == productId);
         if (product == null)
-            throw new ProductNotFoundException($"ID {productId} olan məhsul tapılmadı!");
+            throw new ProductNotFoundException($"ID {productId} olan mehsul tapılmadı!");
 
         _productService.RestoreProduct(productId);
-        Console.WriteLine($"\n✅ Məhsul '{product.Name}' bərpa olundu!");
+        Console.WriteLine($"\n✅ Mehsul '{product.Name}' bərpa olundu!");
     }
 
     private static void ShowDeletedProducts()
     {
         Console.Clear();
-        Console.WriteLine("🗑️ SİLİNMİŞ MƏHSULLAR");
+        Console.WriteLine("🗑️ SILINMIS MEHSULLAR");
         Console.WriteLine("════════════════════════════════════════\n");
 
         var deletedProducts = _products.Where(p => p.IsDeleted).ToList();
 
         if (deletedProducts.Count == 0)
         {
-            Console.WriteLine("❌ Silinmiş məhsul yoxdur!");
+            Console.WriteLine("❌ Silinmis mehsul yoxdur!");
             return;
         }
 
@@ -408,7 +408,7 @@ class Program
             Console.WriteLine($"ID: {product.Id} | {product.Name} ({product.Price:C})");
         }
 
-        Console.WriteLine($"\n📊 Cəmi Silinmiş Məhsul: {deletedProducts.Count}");
+        Console.WriteLine($"\n📊 Cemi Silinmis Mehsul: {deletedProducts.Count}");
     }
 
     #endregion
@@ -418,46 +418,46 @@ class Program
     private static void CreateOrder()
     {
         Console.Clear();
-        Console.WriteLine("🆕 SİFARİŞ YARAT");
+        Console.WriteLine("🆕 SIFARIS YARAT");
         Console.WriteLine("════════════════════════════════════════");
 
         if (_customers.Count == 0)
         {
-            Console.WriteLine("❌ Əvvəl müştəri əlavə edin!");
+            Console.WriteLine("❌ Evvel müsteri elave edin!");
             return;
         }
 
-        Console.WriteLine("\nMüştərilər:");
+        Console.WriteLine("\nMusteriler:");
         foreach (var cust in _customers)
         {
             Console.WriteLine($"{cust.Id}. {cust.FirstName} {cust.LastName}");
         }
 
-        Console.Write("\nMüştəri ID seçin: ");
+        Console.Write("\nMusteri ID secin: ");
         if (!int.TryParse(Console.ReadLine(), out int customerId))
-            throw new ArgumentException("Yanlış müştəri ID!");
+            throw new ArgumentException("Yanlıs musteri ID!");
 
         var selectedCustomer = _customers.FirstOrDefault(c => c.Id == customerId);
         if (selectedCustomer == null)
-            throw new CustomerNotFoundException($"Müştəri tapılmadı!");
+            throw new CustomerNotFoundException($"Musteri tapılmadı!");
 
         var order = _orderService.CreateOrder(selectedCustomer);
         _orders.Add(order);
 
-        Console.WriteLine($"\n✅ Sifariş yağışarsa yaradıldı!");
-        Console.WriteLine($"   Sifariş ID: {order.Id}");
-        Console.WriteLine($"   Müştəri: {selectedCustomer.FirstName} {selectedCustomer.LastName}");
+        Console.WriteLine($"\n✅ Sifaris yaradıldı!");
+        Console.WriteLine($"   Sifaris ID: {order.Id}");
+        Console.WriteLine($"   Musteri: {selectedCustomer.FirstName} {selectedCustomer.LastName}");
     }
 
     private static void AddProductToOrder()
     {
         Console.Clear();
-        Console.WriteLine("➕ MƏHSULU SİFARİŞ-Ə ƏLAVƏ ET");
+        Console.WriteLine("➕ MEHSULU SIFARIS-E ELAVE ET");
         Console.WriteLine("════════════════════════════════════════");
 
         if (_orders.Count == 0)
         {
-            Console.WriteLine("❌ Əvvəl sifariş yaratın!");
+            Console.WriteLine("❌ Evvel sifaris yaradın!");
             return;
         }
 
