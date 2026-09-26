@@ -154,35 +154,35 @@ class Program
         Console.WriteLine("                    🛒 SHOPHUB - Alışveriş Platforması");
         Console.WriteLine("════════════════════════════════════════════════════════════\n");
 
-        Console.WriteLine("👥 Müştəri Yönetimi:");
-        Console.WriteLine("   1. Müştəri əlavə et");
-        Console.WriteLine("   2. Məhsul əlavə et");
+        Console.WriteLine("👥 Müşteri Yonetimi:");
+        Console.WriteLine("   1. Müşteri elave et");
+        Console.WriteLine("   2. Mehsul elave et");
 
-        Console.WriteLine("\n🛍️ Məhsul Yönetimi:");
-        Console.WriteLine("   3. Bütün məhsulları göstər");
-        Console.WriteLine("   4. Məhsul axtar");
-        Console.WriteLine("   5. Məhsulları filtrə et");
-        Console.WriteLine("   13. Məhsulu sil");
-        Console.WriteLine("   14. Məhsulu bərpa et");
-        Console.WriteLine("   15. Silinmiş məhsulları göstər");
+        Console.WriteLine("\n🛍️ Mehsul Yönetimi:");
+        Console.WriteLine("   3. Butun mehsulları goster");
+        Console.WriteLine("   4. Mehsul axtar");
+        Console.WriteLine("   5. Mehsulları filtre et");
+        Console.WriteLine("   13. Mehsulu sil");
+        Console.WriteLine("   14. Mehsulu berpa et");
+        Console.WriteLine("   15. Silinmis mehsulları goster");
 
-        Console.WriteLine("\n📦 Sifariş Yönetimi:");
-        Console.WriteLine("   6. Sifariş yarat");
-        Console.WriteLine("   7. Sifariş-ə məhsul əlavə et");
-        Console.WriteLine("   8. Sifariş-dən məhsul çıxar");
-        Console.WriteLine("   9. Sifariş-i göstər");
-        Console.WriteLine("   10. Sifariş-i təsdiqlə (Ödəniş)");
-        Console.WriteLine("   11. Sifariş-i ləğv et");
-        Console.WriteLine("   12. Müştəri sifarişlərini göstər");
+        Console.WriteLine("\n📦 Sifaris Yonetimi:");
+        Console.WriteLine("   6. Sifaris yarat");
+        Console.WriteLine("   7. Sifaris-e mehsul elave et");
+        Console.WriteLine("   8. Sifaris-den mehsul cıxar");
+        Console.WriteLine("   9. Sifaris-i goster");
+        Console.WriteLine("   10. Sifaris-i tesdiqle (Odenis)");
+        Console.WriteLine("   11. Sifaris-i legv et");
+        Console.WriteLine("   12. Musteri sifarislərini goster");
 
         Console.WriteLine("\n📊 Analitika və Sistem:");
-        Console.WriteLine("   16. Məhsul Statistikası");
+        Console.WriteLine("   16. Mehsul Statistikası");
         Console.WriteLine("   17. Object Inspector");
         Console.WriteLine("   18. Garbage Collection Test");
 
-        Console.WriteLine("\n   0. Çıxış");
+        Console.WriteLine("\n   0. Cıxıs");
         Console.WriteLine("════════════════════════════════════════════════════════════\n");
-        Console.Write("Seçim edin: ");
+        Console.Write("Secim edin: ");
     }
 
     #region Customer Operations
@@ -190,7 +190,7 @@ class Program
     private static void AddCustomer()
     {
         Console.Clear();
-        Console.WriteLine("👤 YENİ MÜŞTƏRI ƏLAVƏ ET");
+        Console.WriteLine("👤 YENİ MUSTERI ELAVE ET");
         Console.WriteLine("════════════════════════════════════════");
 
         Console.Write("\nAdı: ");
@@ -211,7 +211,7 @@ class Program
         var customer = new Customer(_customerIdCounter++, firstName, lastName, email, phone);
         _customers.Add(customer);
 
-        Console.WriteLine($"\n✅ Müştəri uğurla əlavə olundu!");
+        Console.WriteLine($"\n✅ Musteri ugurla elavə olundu!");
         Console.WriteLine($"   ID: {customer.Id}");
         Console.WriteLine($"   Ad: {customer.FirstName} {customer.LastName}");
         Console.WriteLine($"   Email: {customer.Email}");
@@ -224,19 +224,18 @@ class Program
     private static void AddProduct()
     {
         Console.Clear();
-        Console.WriteLine("📦 YENİ MƏHSUL ƏLAVƏ ET");
+        Console.WriteLine("📦 YENI MEHSUL ELAVE ET");
         Console.WriteLine("════════════════════════════════════════");
 
-        Console.Write("\nMəhsul adı: ");
+        Console.Write("\nMehsul adı: ");
         string name = Console.ReadLine() ?? "";
 
-        Console.Write("Təsviri: ");
+        Console.Write("Tesviri: ");
         string description = Console.ReadLine() ?? "";
 
-        Console.Write("Qiymət: ");
+        Console.Write("Qiymet: ");
         if (!decimal.TryParse(Console.ReadLine(), out decimal price) || price <= 0)
-            throw new ArgumentException("Qiymət müsbət rəqəm olmalıdır!");
-
+            throw new ArgumentException("Qiymet müsbət rəqəm olmalıdır!");
         Console.Write("Stok sayı: ");
         if (!int.TryParse(Console.ReadLine(), out int stock) || stock < 0)
             throw new ArgumentException("Stok sayı mənfi ola bilməz!");
