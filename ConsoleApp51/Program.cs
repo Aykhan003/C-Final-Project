@@ -238,12 +238,12 @@ class Program
             throw new ArgumentException("Qiymet müsbət rəqəm olmalıdır!");
         Console.Write("Stok sayı: ");
         if (!int.TryParse(Console.ReadLine(), out int stock) || stock < 0)
-            throw new ArgumentException("Stok sayı mənfi ola bilməz!");
+            throw new ArgumentException("Stok sayı menfi ola bilmez!");
 
-        Console.WriteLine("\nKateqoriya seçin:");
+        Console.WriteLine("\nKateqoriya secin:");
         Console.WriteLine("1. Electronics");
         Console.WriteLine("2. Clothing");
-        Console.Write("Seçim: ");
+        Console.Write("Secim: ");
         string categoryChoice = Console.ReadLine() ?? "1";
 
         Category category = categoryChoice == "2" ? Category.Clothing : Category.Electronics;
@@ -252,7 +252,7 @@ class Program
         _products.Add(product);
         _productService.AddProduct(product);
 
-        Console.WriteLine($"\n✅ Məhsul uğurla əlavə olundu!");
+        Console.WriteLine($"\n✅ Mehsul ugurla elave olundu!");
         Console.WriteLine($"   ID: {product.Id}");
         Console.WriteLine($"   Adı: {product.Name}");
         Console.WriteLine($"   Qiymət: {product.Price:C}");
@@ -262,36 +262,36 @@ class Program
     private static void ShowProducts()
     {
         Console.Clear();
-        Console.WriteLine("📦 BÜTÜN MƏHSULLAR");
+        Console.WriteLine("📦 BUTUN MEHSULLAR");
         Console.WriteLine("════════════════════════════════════════\n");
 
         var activeProducts = _products.Where(p => !p.IsDeleted).ToList();
 
         if (activeProducts.Count == 0)
         {
-            Console.WriteLine("❌ Məhsul yoxdur!");
+            Console.WriteLine("❌ Mehsul yoxdur!");
             return;
         }
 
         foreach (var product in activeProducts)
         {
             Console.WriteLine($"ID: {product.Id} | {product.Name}");
-            Console.WriteLine($"   Qiymət: {product.Price:C} | Stok: {product.Stock}");
-            Console.WriteLine($"   Kateqoriya: {product.Category} | Təsvir: {product.Description}");
-            Console.WriteLine($"   Stokda: {(product.IsInStock() ? "✅ Mövcud" : "❌ Bitib")}");
+            Console.WriteLine($"   Qiymet: {product.Price:C} | Stok: {product.Stock}");
+            Console.WriteLine($"   Kateqoriya: {product.Category} | Tesvir: {product.Description}");
+            Console.WriteLine($"   Stokda: {(product.IsInStock() ? "✅ Movcud" : "❌ Bitib")}");
             Console.WriteLine("────────────────────────────────────────");
         }
 
-        Console.WriteLine($"\n📊 Cəmi Məhsul: {activeProducts.Count}");
+        Console.WriteLine($"\n📊 Cemi Mehsul: {activeProducts.Count}");
     }
 
     private static void SearchProduct()
     {
         Console.Clear();
-        Console.WriteLine("🔍 MƏHSUL AXTAR");
+        Console.WriteLine("🔍 MEHSUL AXTAR");
         Console.WriteLine("════════════════════════════════════════");
 
-        Console.Write("\nAxtarış sorğusu (ad): ");
+        Console.Write("\nAxtarıs sorgusu (ad): ");
         string query = Console.ReadLine() ?? "";
 
         var results = _products
@@ -300,11 +300,11 @@ class Program
 
         if (results.Count == 0)
         {
-            Console.WriteLine("\n❌ Məhsul tapılmadı!");
+            Console.WriteLine("\n❌ Mehsul tapılmadı!");
             return;
         }
 
-        Console.WriteLine($"\n✅ {results.Count} məhsul tapıldı:\n");
+        Console.WriteLine($"\n✅ {results.Count} mehsul tapıldı:\n");
         foreach (var product in results)
         {
             Console.WriteLine($"• {product.Name} ({product.Price:C}) - Stok: {product.Stock}");
@@ -314,22 +314,22 @@ class Program
     private static void FilterProducts()
     {
         Console.Clear();
-        Console.WriteLine("⚙️ MƏHSULLAR FİLTRELƏ ET");
-        Console.WriteLine("════════════════════════════════════════");
+        Console.WriteLine("⚙️ MEHSULLAR FİLTRELƏ ET");
+        Console.WriteLine("════════════════════════════════════");
 
-        Console.WriteLine("\nKateqoriya seçin:");
+        Console.WriteLine("\nKateqoriya secin:");
         Console.WriteLine("1. Electronics");
         Console.WriteLine("2. Clothing");
-        Console.Write("Seçim: ");
+        Console.Write("Secim: ");
         string categoryChoice = Console.ReadLine() ?? "1";
 
         Category category = categoryChoice == "2" ? Category.Clothing : Category.Electronics;
 
-        Console.Write("\nMin qiymət: ");
+        Console.Write("\nMin qiymet: ");
         if (!decimal.TryParse(Console.ReadLine(), out decimal minPrice))
             minPrice = 0;
 
-        Console.Write("Max qiymət: ");
+        Console.Write("Max qiymet: ");
         if (!decimal.TryParse(Console.ReadLine(), out decimal maxPrice))
             maxPrice = decimal.MaxValue;
 
